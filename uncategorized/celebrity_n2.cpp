@@ -13,7 +13,7 @@ int findceleb_n2(vector<vector<int>> connections) {
         }
     }
     for(int i=0; i<n; ++i) {
-        if(indegree[i] == n-1 && outdegree[n] == 0) {
+        if(indegree[i] == n-1 && outdegree[i] == 0) {
             return i;
         }
     }
@@ -57,6 +57,20 @@ int find_celeb_two_pointers(vector<vector<int>> connections) {
     }
     return celeb;
 }
+
+int find_celeb_magic(vector<vector <int>> connections) {
+    int n = connections.size();
+    int candidate = 0;
+    for(int i=1; i<n; ++i) {
+        if(connections[candidate][i] == 1) candidate = i;
+    }
+
+    for(int i=0; i<n; ++i) {
+        if(i!=candidate && (connections[candidate][i] == 1 || connections[i][candidate] == 0)) return -1;
+    } 
+    return candidate;
+}
+
 int main() {
     vector<vector<int>> connections =   {{0, 0, 1, 0},
                                         {0, 0, 1, 0}, 
@@ -65,6 +79,7 @@ int main() {
     cout<<"Celeb is " << findceleb_n2(connections) <<endl;
     cout<<"Celeb <stack> is " << find_celeb_stack(connections) <<endl;
     cout<<"Celeb <two pointers> is " << find_celeb_two_pointers(connections) <<endl;
+    cout<<"Celeb <O N> is " << find_celeb_magic(connections) <<endl;
 
     return 0;
 }

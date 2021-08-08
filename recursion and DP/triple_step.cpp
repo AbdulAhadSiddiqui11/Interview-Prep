@@ -39,7 +39,7 @@ int child_hop_memo(int steps, vector<int> &memo) {
 }
 
 int main() {
-    int n = 5;
+    int n = 1;
     cout<<child_hop(n)<<endl;
     cout<<child_hop_dp(n)<<endl;
     vector<int> steps(n,-1);
